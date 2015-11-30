@@ -1,8 +1,9 @@
-// LaPa JS Layer v.0.0.1
+// LaPa JS Layer v.0.0.4
 
-var VERSION=1;
+var VERSION=4;
 
 var SYSTEM={};
+var CONF={};
 
 SYSTEM['current_page']=false;
 
@@ -20,6 +21,7 @@ parseParams();
 window.onpopstate=function(){historyNav()};
 
 function init(){
+
     io({'status':'init'});
     SYSTEM['query']=location.search;
     history.replaceState(null,null,SYSTEM['current_page']||'/');
