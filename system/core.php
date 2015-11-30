@@ -25,7 +25,7 @@ function dbg($text){
     //if (!defined('USER_ID')||USER_ID == 1) {
     $text = $text . '
 ';
-    $old = file(ROOT . 'errlog.txt');
+    $old = file(ROOT . 'errlog.txt')||array('');
     if ($old && $old[count($old) - 1] == $text) {
         return true;
     }
@@ -36,10 +36,12 @@ function dbg($text){
 }
 
 function dbg_clean(){
-    //$file = fopen(ROOT . 'errlog.txt', 'w');
-    //fclose($file);
+    $file = fopen(ROOT . 'errlog.txt', 'w');
+    fclose($file);
     dbg('');
 }
+
+dbg_clean();
 
 function check($string,$cls_probels=false){ // Функция обработки принятых данных
     // $cls_probels устанавливает разрешение на очистку строки от пробелов
@@ -92,6 +94,7 @@ if (!empty($link[1])) {
 }
 
 $js_dir = scandir(ROOT.'js');
+$scripts='';
 for ($i = 2; $i < count($js_dir); $i++){
     $tjs=explode('.', $js_dir[$i]);
     if(isset($tjs[count($js_dir[$i])])) {
