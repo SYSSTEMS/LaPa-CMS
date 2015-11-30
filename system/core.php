@@ -1,14 +1,14 @@
 <?php
 
 // LaPa CMS
-// v.0.0.3.1115
+// v.0.0.4.1115
 
 header("HTTP/1.0 200 OK");
 header("Access-Control-Allow-Origin: *");
 
-define('VERSION',3);
+define('VERSION',4);
 define('BUILD',1115);
-define('LAPA','LaPa v.0.0.3.1115');
+define('LAPA','LaPa v.0.0.4.1115');
 
 function objectToArray($d){
     if (is_object($d)) {
