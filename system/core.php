@@ -10,6 +10,8 @@ define('VERSION',3);
 define('BUILD',1115);
 define('LAPA','LaPa v.0.0.3.1115');
 
+$SYSTEM=[];
+
 function objectToArray($d){
     if (is_object($d)) {
         $d = get_object_vars($d);
@@ -77,30 +79,13 @@ for ($i = 2; $i < count($cfg_dir); $i++) {
     }
 }
 
+//$SYSTEM['LIB']=[];
 $class_dir = scandir(ROOT . 'system/lib');
 for ($i = 2; $i < count($class_dir); $i++) {
     if (explode('.', $class_dir[$i])[count($class_dir[$i])] == 'php') {
         require_once(ROOT . 'system/lib/' . $class_dir[$i]);
+        //$SYSTEM['LIB'][]=$class_dir[$i];
     }
 }
 
 $CONF=mysqli_fetch_assoc(DB::select('config',['*']));
-
-$link = explode('/', $_SERVER['REQUEST_URI']);
-$page = 'index';
-if (!empty($link[1])) {
-    // Case for pages
-    define('PAGE', strtolower($page));
-}
-
-$js_dir = scandir(ROOT.'js');
-$scripts='';
-for ($i = 2; $i < count($js_dir); $i++){
-    $tjs=explode('.', $js_dir[$i]);
-    if(isset($tjs[count($js_dir[$i])])) {
-        if ($tjs[count($js_dir[$i])] == 'js') {
-            $scripts .= '<script src="/js/' . $js_dir[$i] . '"></script>';
-        }
-    }
-}
-define('HEAD','<title>'.$CONF['site.title'].'</title><meta charset="utf-8" />'.$scripts);

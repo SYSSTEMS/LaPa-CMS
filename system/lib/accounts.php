@@ -3,7 +3,7 @@
 require_once ROOT.'system/lib/db.php';
 
 class USER {
-    public static $VERSION='0.9';
+    public static $VERSION=9;
     public static function init(){
         if(isset($_COOKIE['token'])){
             $id=mysqli_fetch_assoc(DB::select('atoken',['*'],'hash="'.check($_COOKIE['token'],true).'"'));
