@@ -1,0 +1,11 @@
+<?php
+$PAGE=[
+    'id'=>'registration',
+    'title'=>'Регистрация',
+    'body'=>file_get_contents(ROOT.'system/pages/registration.html'),
+    'build'=>'top_menu();',
+    'dependency'=>[
+        'user',
+        'menu'
+    ]
+];
