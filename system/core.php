@@ -33,3 +33,15 @@ $configs=DB::select('config',['*']);
 while ($param = mysqli_fetch_assoc($configs)) {
     $CONF[$param['key']]=$param['value'];
 }
+
+$js_dir = scandir(ROOT.'js');
+$scripts='';
+for ($i = 2; $i < count($js_dir); $i++){
+    $tjs=explode('.', $js_dir[$i]);
+    if(isset($tjs[count($js_dir[$i])])) {
+        if ($tjs[count($js_dir[$i])] == 'js') {
+            $scripts .= '<script src="/js/' . $js_dir[$i] . '"></script>';
+        }
+    }
+}
+define('HEAD','<title>'.$CONF['site.title'].'</title><meta charset="utf-8" />'.$scripts);
