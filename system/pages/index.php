@@ -3,9 +3,9 @@ $PAGE=[
     'id'=>'index',
     'title'=>'Главная',
     'body'=>file_get_contents(ROOT.'system/pages/index.html'),
-    'build'=>'top_menu();',
-    'dependency'=>[
-        'user',
-        'menu'
-    ]
+    'build'=>'',
+    'template'=>[
+        'css'=>'/assets/css/main.css'
+    ],
+    'postload'=>'/assets/js/main.js'
 ];
