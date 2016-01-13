@@ -1,6 +1,6 @@
-// LaPa JS Layer v.0.0.5
+// LaPa JS Layer
 
-var CORE=6;
+var CORE=10;
 
 var SYSTEM={};
 var CONF={};

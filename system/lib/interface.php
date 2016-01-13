@@ -7,12 +7,16 @@ class PAGE {
         global $CONF;
         $link = explode('/', $_SERVER['REQUEST_URI']);
         $page = 'index';
+        $ext = '';
         if (!empty($link[1])) {
             // Case for pages
             define('PAGE', strtolower($page));
         }
         $scripts=PAGE::requireJs();
-        define('HEAD','<title>'.$CONF['site.title'].'</title><meta charset="utf-8" />'.$scripts);
+        if(isset($CONF['head.screenFix'])){
+            $ext.='<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />';
+        }
+        define('HEAD',$ext.'<title>'.$CONF['site.title'].'</title><meta charset="utf-8" />'.$scripts);
     }
     public static function requireJs(){
         $js_dir = scandir(ROOT.'js');

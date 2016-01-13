@@ -1,14 +1,13 @@
 <?php
 
 // LaPa CMS
-// v.0.0.6.1215
+// v.0.1.0
 
 header("HTTP/1.0 200 OK");
 header("Access-Control-Allow-Origin: *");
 
-define('VERSION',6);
-define('BUILD',1215);
-define('LAPA','LaPa v.0.0.6.1215');
+define('VERSION',10);
+define('LAPA','LaPa CMS v.0.1.0');
 
 require_once ROOT.'system/func.php';
 
