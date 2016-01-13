@@ -69,4 +69,8 @@ class DB {
         }
         else return false;
     }
+    public static function mysql_exit(){
+        global $MYSQL_CONNECTION;
+        mysqli_close($MYSQL_CONNECTION);
+    }
 }

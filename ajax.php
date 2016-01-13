@@ -66,3 +66,4 @@ if(isset($QUERY['module'])){
 }
 
 echo(json_encode($RESPONSE));
+DB::mysql_exit();
