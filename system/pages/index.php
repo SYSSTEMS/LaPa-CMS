@@ -7,5 +7,7 @@ $PAGE=[
     'template'=>[
         'css'=>'/assets/css/main.css'
     ],
-    'postload'=>'/assets/js/main.js'
+    'postloads'=>[
+        '/assets/js/main.js'
+    ]
 ];
