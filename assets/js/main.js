@@ -52,7 +52,6 @@
 				$wrapper = document.createElement('div');
 					$wrapper.id = 'bg';
 					$body.appendChild($wrapper);
-
 				for (k in settings.images) {
 
 					// Create BG.

@@ -137,7 +137,6 @@ function page(id) {
         if((id!=CONF['pid'])||SYSTEM['initialized']==false) {
             if ((SYSTEM['preloading'] == false) || SYSTEM['preloading'] == id) {
                 dependency = true;
-                loader('show');
                 if (PAGE[id]['dependency']) {
                     for (i in PAGE[id]['dependency']) {
                         //module();
@@ -212,8 +211,11 @@ function page(id) {
                     SYSTEM['preloading'] = id;
                 }
             }
+        }else{
+            loader('hide');
         }
     } else {
+        loader('show');
         io({'page': id}, pageLoaded);
     }
 }
