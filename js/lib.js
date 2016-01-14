@@ -1,4 +1,4 @@
-var LIB=10;
+var LIB=11;
 
 function getCookie(name) {
     var matches = document.cookie.match(new RegExp(
@@ -120,23 +120,24 @@ function io(array,callback){
 }
 
 /*function page(id) {
- if (PAGE[id]) {
- document.title=PAGE[id]['title']+' | '+CONF['site.title'];
- document.body.innerHTML = PAGE[id]['body'];
- for(i in PAGE[id]['dependency']){
- module(PAGE[id]['dependency'][i]);
- }
- eval(PAGE[id]['build']);
- } else {
- io({'page': id}, pageLoaded);
- }
- }*/
+    if (PAGE[id]) {
+        document.title=PAGE[id]['title']+' | '+CONF['site.title'];
+        document.body.innerHTML = PAGE[id]['body'];
+        for(i in PAGE[id]['dependency']){
+            module(PAGE[id]['dependency'][i]);
+        }
+        eval(PAGE[id]['build']);
+    } else {
+        io({'page': id}, pageLoaded);
+    }
+}*/
 
 function page(id) {
     if (PAGE[id]) {
         if((id!=CONF['pid'])||SYSTEM['initialized']==false) {
             if ((SYSTEM['preloading'] == false) || SYSTEM['preloading'] == id) {
                 dependency = true;
+                loader('show');
                 if (PAGE[id]['dependency']) {
                     for (i in PAGE[id]['dependency']) {
                         //module();
@@ -175,7 +176,6 @@ function page(id) {
                 if (dependency == true) {
                     SYSTEM['preloading'] = false;
                     document.title = PAGE[id]['title'] + ' | ' + CONF['site.title'];
-                    document.body.innerHTML = PAGE[id]['body'];
                     if (document.getElementById('css_link')) {
                         document.head.removeChild(document.getElementById('css_link'));
                     }
@@ -187,6 +187,13 @@ function page(id) {
                         fileref.setAttribute("href", PAGE[id]['css']);
                         document.getElementsByTagName("head")[0].appendChild(fileref);
                     }
+                    document.getElementById('page').innerHTML = PAGE[id]['body'];
+                    if(PAGE[id]['header']&&document.getElementById('header')) {
+                        document.getElementById('header').innerHTML = PAGE[id]['header'];
+                    }
+                    if(PAGE[id]['footer']&&document.getElementById('footer')) {
+                        document.getElementById('footer').innerHTML = PAGE[id]['footer'];
+                    }
                     //pageBuild('/system/pages/'+id+'.js');
                     eval(PAGE[id]['build']);
                     if (PAGE[id]['postloads']) {
@@ -195,10 +202,12 @@ function page(id) {
                             js_page.setAttribute("type", "text/javascript");
                             //js_page.setAttribute("id", "js");
                             js_page.setAttribute("src", PAGE[id]['postloads'][i]);
-                            document.getElementsByTagName("body")[0].appendChild(js_page);
+                            document.getElementById('page').appendChild(js_page);
                         }
                     }
+                    loader('hide');
                     SYSTEM['initialized'] = true;
+                    CONF['pid']=id;
                 } else {
                     SYSTEM['preloading'] = id;
                 }
@@ -242,8 +251,10 @@ function exec(module,version){
 
 function loader(state){
     if(state=='show'){
-        get('loader').innerHTML='<div class="cssload-container"><div class="cssload-speeding-wheel"></div></div>';
+        document.body.classList.remove('loaded');
+        //get('loader').innerHTML='<div class="cssload-container"><div class="cssload-speeding-wheel"></div></div>';
     }else if(state=='hide'){
-        get('loader').innerHTML='';
+        document.body.classList.add('loaded');
+        //get('loader').innerHTML='';
     }
 }
