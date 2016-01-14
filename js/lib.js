@@ -225,6 +225,9 @@ function pageLoaded(response) {
         item = response['page'];
         PAGE[item['id']] = item;
         page(item['id']);
+    }else{
+        loader('hide');
+        alert('Ошибка при загрузке страницы');
     }
 }
 
