@@ -10,4 +10,5 @@ $PAGE='<!DOCTYPE html><html lang="'.$CONF['lang'].'"><head><meta name="viewport"
 <div id="loader-wrapper"><div id="loader"></div><div class="loader-section section-left"></div><div class="loader-section section-right"></div></div>
 </body></html>';
 
-exit($PAGE);
+echo($PAGE);
+DB::mysql_exit();
